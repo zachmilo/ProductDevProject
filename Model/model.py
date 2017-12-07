@@ -1,10 +1,7 @@
-from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Table, Column, ForeignKey
 
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:!Apple45@localhost/test" 
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 class RiskType(db.Model):
     __tablename__ = "risk_type"
@@ -32,4 +29,3 @@ class EnumForRiskField(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     riskTypeID = db.Column(db.Integer,ForeignKey("risk_field.id"), nullable=False)
     enumOption = db.Column(db.String(180), nullable=False)
-

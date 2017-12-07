@@ -1,15 +1,13 @@
 
 from flask import Flask, jsonify
+from flask_cors import CORS
+from model.model import db
 from model import constructor as query
 
 app = Flask(__name__)
-
-print(query.getOneRisk())
-
-@app.route("/")
-def initPage():
-    ## this will return the generic risk
-    return "Hello World!"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:!Apple45@localhost/test"
+CORS(app)
+db.init_app(app)
 
 @app.route("/singlerisk")
 def singleRiskType():
